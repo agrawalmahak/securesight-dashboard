@@ -22,7 +22,7 @@ export default function IncidentList({ incidents, counts, onSelectIncident, sele
   {
   return (
     <div>
-      <h2 className="text-lg font-semibold mb-4">Unresolved Incidents ({incidents.length})</h2>
+      <h2 className="text-lg font-semibold">Unresolved Incidents ({counts.unresolved})</h2>
       <div className="space-y-3">
         {incidents.map((incident) => (
           <motion.div
