@@ -1,4 +1,3 @@
-// src/components/IncidentTimeline.tsx
 'use client';
 
 import type { IncidentWithCamera } from '@/types';
@@ -19,8 +18,9 @@ interface IncidentTimelineProps {
 export default function IncidentTimeline({ incidents, selectedIncident, onSelectIncident }: IncidentTimelineProps) {
   const totalMinutesInDay = 24 * 60;
 
-  const calculatePosition = (timestamp: Date) => {
-  const date = timestamp; 
+  // This function now correctly accepts a string and converts it to a Date
+  const calculatePosition = (timestamp: string | Date) => {
+    const date = new Date(timestamp); // Always create a new Date object
     const minutes = date.getHours() * 60 + date.getMinutes();
     return (minutes / totalMinutesInDay) * 100;
   };
@@ -31,10 +31,8 @@ export default function IncidentTimeline({ incidents, selectedIncident, onSelect
     <div className="w-full bg-gray-800 p-4 border-t border-gray-700">
       <h3 className="text-lg font-semibold mb-4">Incident Timeline (24h)</h3>
       <div className="relative w-full h-16">
-        {/* The main timeline bar */}
         <div className="absolute top-1/2 -translate-y-1/2 w-full h-1 bg-gray-600 rounded-full" />
         
-        {/* Hour markers */}
         {Array.from({ length: 9 }).map((_, i) => {
           const hour = i * 3;
           return (
@@ -45,18 +43,16 @@ export default function IncidentTimeline({ incidents, selectedIncident, onSelect
           );
         })}
 
-        {/* Incident markers */}
         {incidents.map((incident) => (
           <div
-  key={incident.id}
-  className={`absolute top-1/2 w-3 h-3 rounded-full -translate-y-1/2 -translate-x-1/2 cursor-pointer transition-transform hover:scale-150 ${typeColors[incident.type] || 'bg-white'}`}
-  style={{ left: `${calculatePosition(new Date(incident.tsStart))}%` }}
-  title={`${incident.type} at ${new Date(incident.tsStart).toLocaleTimeString()}`}
-  onClick={() => onSelectIncident(incident)}
-/>
+            key={incident.id}
+            className={`absolute top-1/2 w-3 h-3 rounded-full -translate-y-1/2 -translate-x-1/2 cursor-pointer transition-transform hover:scale-150 ${typeColors[incident.type] || 'bg-white'}`}
+            style={{ left: `${calculatePosition(incident.tsStart)}%` }}
+            title={`${incident.type} at ${new Date(incident.tsStart).toLocaleTimeString()}`}
+            onClick={() => onSelectIncident(incident)}
+          />
         ))}
 
-        {/* Scrubber (Playhead) */}
         <div 
           className="absolute top-1/2 h-5 w-1 bg-blue-400 rounded-full -translate-y-1/2 -translate-x-1/2 transition-all duration-300"
           style={{ left: `${scrubberPosition}%` }}
