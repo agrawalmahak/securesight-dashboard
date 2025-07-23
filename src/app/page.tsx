@@ -12,7 +12,7 @@ export default function DashboardPage() {
   const [incidents, setIncidents] = useState<IncidentWithCamera[]>([]);
   const [selectedIncident, setSelectedIncident] = useState<IncidentWithCamera | null>(null);
   const [counts, setCounts] = useState({ unresolved: 0, resolved: 0 });
-  const [isLoading, setIsLoading] = useState(true);
+ 
 
   useEffect(() => {
     // Fetch both the incidents list and the counts at the same time
@@ -27,9 +27,7 @@ export default function DashboardPage() {
       }
     }).catch(error => {
       console.error("Failed to fetch initial data:", error);
-    }).finally(() => {
-      setIsLoading(false);
-    });
+    })
   }, []);
 
   const handleResolve = async (incidentId: string) => {

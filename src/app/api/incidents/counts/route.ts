@@ -14,7 +14,7 @@ export async function GET() {
     });
 
     return NextResponse.json({ unresolved, resolved });
-  } catch (error) {
+  } catch (_error) {
     return NextResponse.json({ error: 'Failed to fetch incident counts' }, { status: 500 });
   }
 }
