@@ -39,7 +39,7 @@ export default function IncidentList({ incidents, onSelectIncident, onResolveInc
                 {new Date(incident.tsStart).toLocaleString()}
               </p>
             </div>
-            <button
+            {/* <button
               onClick={(e) => {
                 e.stopPropagation();
                 onResolveIncident(incident.id);
@@ -47,7 +47,7 @@ export default function IncidentList({ incidents, onSelectIncident, onResolveInc
               className="text-blue-400 hover:text-blue-300 font-semibold"
             >
               Resolve
-            </button>
+            </button> */}
           </motion.div>
         ))}
       </div>
