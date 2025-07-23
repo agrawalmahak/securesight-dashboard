@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# SecureSight Dashboard - Technical Assessment
 
-First, run the development server:
+A full-stack dashboard for the fictional CCTV monitoring software, SecureSight. This application allows users to view, manage, and analyze security incidents from multiple camera feeds in real-time.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Live URL:** [Vercel Deployment](https://securesight-dashboard-ucxi.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-----
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+  * **Dynamic Video Player:** Features a main player that displays a unique video for each incident, along with two secondary video feeds for situational awareness.
+  * **Animated Incident List:** A fully interactive list where incidents can be selected with smooth entrance animations.
+  * **Responsive Design:** The layout adapts for a seamless experience on both desktop and mobile devices.
+  * **Interactive Timeline (Extra Credit):** A timeline at the bottom visualizes all incidents over a 24-hour period. Clicking a marker on the timeline updates the entire UI.
 
-## Learn More
+> **Note on "Resolve" Functionality:** The "Resolve Incident" feature, including its API route and UI button, was fully implemented but temporarily disabled due to a persistent, environment-specific build error on Vercel. The working code for this feature can be reviewed in the project's Git history.
 
-To learn more about Next.js, take a look at the following resources:
+-----
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🛠️ Tech Decisions
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+  * **Framework:** **Next.js 15 (App Router)** was used as required, providing a modern full-stack environment.
+  * **Database & ORM:** **Neon (Serverless Postgres)** with **Prisma** was chosen for its scalability and compatibility with serverless environments like Vercel.
+  * **Styling:** **Tailwind CSS** was used for its utility-first approach, enabling the rapid development of the custom and responsive design.
+  * **Animation:** **Framer Motion** was used to add professional entrance animations and smooth layout transitions.
 
-## Deploy on Vercel
+-----
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🚀 Deployment Instructions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/agrawalmahak/securesight-dashboard.git
+    ```
+2.  **Navigate into the project directory:**
+    ```bash
+    cd securesight-dashboard
+    ```
+3.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+4.  **Set up environment variables:**
+      * Create a file named `.env` in the root of the project.
+      * Add your Neon database connection string to it:
+        ```env
+        DATABASE_URL="postgresql://user:password@..."
+        ```
+5.  **Sync and seed the database:**
+    ```bash
+    npx prisma db push
+    npx prisma db seed
+    ```
+6.  **Run the development server:**
+    ```bash
+    npm run dev
+    ```
+
+-----
+
+## 🔮 If I Had More Time…
+
+  * **Real-time Updates:** Implement WebSockets to push new incidents to clients in real-time.
+  * **Full Timeline Interactivity:** Add drag-to-scrub functionality to the timeline.
+  * **Authentication:** Implement a full user login system using NextAuth.js.
+  * **Testing:** Write unit and integration tests with Jest and React Testing Library.
