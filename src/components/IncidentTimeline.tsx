@@ -19,8 +19,8 @@ interface IncidentTimelineProps {
 export default function IncidentTimeline({ incidents, selectedIncident, onSelectIncident }: IncidentTimelineProps) {
   const totalMinutesInDay = 24 * 60;
 
-  const calculatePosition = (timestamp: string) => {
-    const date = new Date(timestamp);
+  const calculatePosition = (timestamp: Date) => {
+  const date = timestamp; 
     const minutes = date.getHours() * 60 + date.getMinutes();
     return (minutes / totalMinutesInDay) * 100;
   };
@@ -48,12 +48,12 @@ export default function IncidentTimeline({ incidents, selectedIncident, onSelect
         {/* Incident markers */}
         {incidents.map((incident) => (
           <div
-            key={incident.id}
-            className={`absolute top-1/2 w-3 h-3 rounded-full -translate-y-1/2 -translate-x-1/2 cursor-pointer transition-transform hover:scale-150 ${typeColors[incident.type] || 'bg-white'}`}
-            style={{ left: `${calculatePosition(incident.tsStart)}%` }}
-            title={`${incident.type} at ${new Date(incident.tsStart).toLocaleTimeString()}`}
-            onClick={() => onSelectIncident(incident)} // <-- Add this click handler
-          />
+  key={incident.id}
+  className={`absolute top-1/2 w-3 h-3 rounded-full -translate-y-1/2 -translate-x-1/2 cursor-pointer transition-transform hover:scale-150 ${typeColors[incident.type] || 'bg-white'}`}
+  style={{ left: `${calculatePosition(new Date(incident.tsStart))}%` }}
+  title={`${incident.type} at ${new Date(incident.tsStart).toLocaleTimeString()}`}
+  onClick={() => onSelectIncident(incident)}
+/>
         ))}
 
         {/* Scrubber (Playhead) */}

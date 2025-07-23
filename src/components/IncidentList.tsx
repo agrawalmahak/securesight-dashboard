@@ -18,7 +18,7 @@ interface IncidentListProps {
 }
 
 
-export default function IncidentList({ incidents, onSelectIncident, onResolveIncident, selectedIncidentId }: IncidentListProps)
+export default function IncidentList({ incidents, counts, onSelectIncident, selectedIncidentId }: IncidentListProps) 
   {
   return (
     <div>
