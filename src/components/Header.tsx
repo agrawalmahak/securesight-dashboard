@@ -16,7 +16,7 @@ export default function Header() {
     <header className="bg-gray-800 p-4 flex items-center justify-between border-b border-gray-700 sticky top-0 z-10">
   
       <div className="flex items-center gap-8">
-        <h1 className="text-xl font-bold text-white">SecureSight</h1>
+       <h1 className="text-xl font-bold text-white">SecureSight V2</h1>
         <nav className="flex items-center gap-6 text-sm text-gray-300">
           {navLinks.map((link, index) => (
             <a
