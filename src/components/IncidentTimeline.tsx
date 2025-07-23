@@ -18,14 +18,17 @@ interface IncidentTimelineProps {
 export default function IncidentTimeline({ incidents, selectedIncident, onSelectIncident }: IncidentTimelineProps) {
   const totalMinutesInDay = 24 * 60;
 
-  // This function now correctly accepts a string and converts it to a Date
-  const calculatePosition = (timestamp: string | Date) => {
-    const date = new Date(timestamp); // Always create a new Date object
+  // This function is now safer and handles invalid inputs
+  const calculatePosition = (timestamp: string | Date | undefined | null) => {
+    if (!timestamp) return -100; // Hide if no timestamp
+    const date = new Date(timestamp);
+    if (isNaN(date.getTime())) return -100; // Hide if date is invalid
+    
     const minutes = date.getHours() * 60 + date.getMinutes();
     return (minutes / totalMinutesInDay) * 100;
   };
 
-  const scrubberPosition = selectedIncident ? calculatePosition(selectedIncident.tsStart) : -100;
+  const scrubberPosition = calculatePosition(selectedIncident?.tsStart);
 
   return (
     <div className="w-full bg-gray-800 p-4 border-t border-gray-700">
